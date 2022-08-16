@@ -18,6 +18,18 @@ Financeiro:
  - Contas a receber 
  - Contas a pagar
  
+## Tarefas
+ 
+- [ ] Gerar códigos para todas as entidades
+- [ ] Incluir filtros nas listagens
+- [X] Paginar todas as listagens
+- [ ] Implementar a edição das entidades nos cadastros
+- [ ] Criar Usuários e Api de Auth
+- [ ] Criar Testes de Integração
+- [ ] Criar queries de indicadores
+- [ ] Implementar algo com Batch
+- [ ] Implementar algo com Integration
+ 
 ## Lista de tecnologias(Linguagens, frameworks, libs, conceitos...) que serão utilizadas
  - Java + Spring Boot
  - Angular
