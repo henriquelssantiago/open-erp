@@ -64,10 +64,10 @@ export class PedidoDeVendaPageComponent implements OnInit {
   iniciarVenda(): void {
     if (!this.clientes.length) {
       this.isLoading = true;
-      forkJoin(this.clientesService.getByPageRequest({
-        page: 1,
-        size: 10
-      }), this.produtosService.getByPageRequest({page: 1, size: 10}))
+      forkJoin(
+        this.clientesService.getByPageRequest({page: 0, size: 1000}),
+        this.produtosService.getByPageRequest({page: 0, size: 1000})
+      )
         .pipe(finalize(() => this.isLoading = false))
         .subscribe(response => {
           this.clientes = response[0].itens;

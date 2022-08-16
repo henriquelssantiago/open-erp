@@ -1,29 +1,28 @@
 import {Component} from '@angular/core';
-import {LayoutService} from "../../core/theme/service/app.layout.service";
 import {PedidoDeVendaService} from "../../shared/pedido-de-venda/services/pedido-de-venda.service";
 import {ClientesService} from "../../shared/clientes/services/clientes.service";
 import {PedidoDeVenda} from "../../shared/pedido-de-venda/domain/pedido-de-venda";
+import {PedidoDeVendaStatus} from "../../shared/pedido-de-venda/domain/pedido-de-venda-status";
 
 @Component({templateUrl: './dashboard.component.html'})
 export class DashboardComponent {
   pedidosQuantidade: number | undefined;
-  pedidosReceita: number | undefined;
-  pedidos: PedidoDeVenda[] = [];
+  pedidosFaturadosReceita: number | undefined;
+  pedidosFaturados: PedidoDeVenda[] = [];
 
   clientesQuantidade: number | undefined;
 
   constructor(private pedidosService: PedidoDeVendaService,
-              private clientesService: ClientesService,
-              public layoutService: LayoutService) {
+              private clientesService: ClientesService) {
 
-    pedidosService.getByPageRequest({page: 0, size: 10})
+    pedidosService.getByPageRequest({page: 0, size: 1000})
       .subscribe(response => {
-        this.pedidos = response.itens;
+        this.pedidosFaturados = response.itens.filter(p => p.status === PedidoDeVendaStatus.FATURADO);
         this.pedidosQuantidade = response.totalElements;
-        this.pedidosReceita = this.pedidos.map(p => p.valorTotal).reduce((pv, cv) => pv + cv, 0);
+        this.pedidosFaturadosReceita = this.pedidosFaturados.map(p => p.valorTotal).reduce((pv, cv) => pv + cv, 0);
       });
 
-    clientesService.getByPageRequest({page: 0, size: 10})
+    clientesService.getByPageRequest({page: 0, size: 1000})
       .subscribe(response => {
         this.clientesQuantidade = response.totalElements;
       });
