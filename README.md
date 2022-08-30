@@ -46,3 +46,5 @@ Financeiro:
  - API DOC
  
  Este README ainda está em construção
+
+![](./imagens-de-exemplo/dashboard.png)
